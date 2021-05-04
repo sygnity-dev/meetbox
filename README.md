@@ -1,2 +1,5 @@
 # meetbox
-WebRTC library for JavaScript
+
+# WebRTC library for JavaScript clients.
+
+
