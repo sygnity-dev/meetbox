@@ -10,6 +10,10 @@
   ],
   "author": "Dariusz Depta",
   "license": "MIT",
+  "main": "dist/meetbox.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EngosSoftware/meetbox.git"
@@ -17,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/EngosSoftware/meetbox/issues"
   },
-  "homepage": "https://github.com/EngosSoftware/meetbox#readme"
+  "homepage": "https://github.com/EngosSoftware/meetbox#readme",
+  "devDependencies": {
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0"
+  }
 }
