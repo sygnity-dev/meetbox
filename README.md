@@ -27,10 +27,11 @@ filled with chocolate background.
   <title>MeetBox</title>
 </head>
 <body>
-  <!-- place any identifier you want -->
+  <!-- place here any identifier you want -->
   <div id="7436f2a1-7810-4b3f-8234-d1ae0e0e3b1c"></div>
   <script src="https://unpkg.com/meetbox"></script>
   <script>
+    <!-- use here your previously defined identifier -->
     window.meetbox.initialize('7436f2a1-7810-4b3f-8234-d1ae0e0e3b1c');
   </script>
 </body>
