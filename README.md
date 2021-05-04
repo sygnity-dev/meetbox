@@ -38,6 +38,23 @@ filled with chocolate background.
 </html>
 ```
 
+### Creating a meeting
+
+To create a new meeting, just call the function `createMeeting`, and send the meeting identifier to
+other party that should join the same meeting:
+
+```js
+const uuid = window.meetbox.createMeeting();
+```
+
+### Join a meeting
+
+To join a meeting, pass the meeting identifier to the function `joinMeeting`:  
+
+```js
+window.meetbox.joinMeeting(uuid);
+```
+
 ## Documentation
 
 - [Changelog](CHANGELOG.md)

@@ -1,6 +1,6 @@
 {
   "name": "meetbox",
-  "version": "0.0.7",
+  "version": "0.0.14",
   "description": "WebRTC library.",
   "keywords": [
     "WebRTC",
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/EngosSoftware/meetbox#readme",
   "devDependencies": {
+    "uuid": "^8.3.2",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.6.0"
   }
