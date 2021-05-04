@@ -12,14 +12,15 @@ $ npm i --save meetbox
 
 ## Current project status
 
-This library is under migration process from private repository to GitHub with intensive refactoring,
-so please come back soon to check the status again.
+This library is under migration process from private repository to GitHub,
+with intensive refactoring, so please come back soon to check the status again.
 
-Currently, this library does nothing but displays the rectangle of size 300x300 pixels, filled with chocolate background.
+Currently, this library does nothing but displays the rectangle of size 300x300 pixels,
+filled with chocolate background.
 
 ## Usage
 
-```
+```html
 <!DOCTYPE html>
 <html>
 <head>
