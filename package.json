@@ -1,0 +1,21 @@
+{
+  "name": "meetbox",
+  "version": "0.0.3",
+  "description": "WebRTC library.",
+  "keywords": [
+    "WebRTC",
+    "library",
+    "meet",
+    "box"
+  ],
+  "author": "Dariusz Depta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EngosSoftware/meetbox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EngosSoftware/meetbox/issues"
+  },
+  "homepage": "https://github.com/EngosSoftware/meetbox#readme"
+}
