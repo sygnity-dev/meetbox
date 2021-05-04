@@ -7,7 +7,7 @@ export function initialize(containerId) {
     const meetboxContainer = createMeetboxContainer();
     container.appendChild(meetboxContainer);
   } else {
-    console.log('Container element with id=', containerId, ' was not found in DOM.');
+    console.log('Container element with id = `' + containerId + '` was not found in document.');
   }
 }
 
