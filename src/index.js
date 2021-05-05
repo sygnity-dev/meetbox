@@ -1,20 +1,16 @@
-import {trace, generateUUID} from "./common"
-import {Messaging} from "./messaging"
+import styles from "./css/styles.css"
+import {trace, generateUUID} from "./common.js"
+import {Components} from "./components.js";
+import {Pipe} from "./pipe.js"
 
-/**
- * Variable storing the configuration.
- */
+/** Variable storing the configuration. */
 let gvConfiguration = null;
-
-/**
- * Variable storing the MeetBox container.
- */
+/** Variable storing the MeetBox container. */
 let gvMeetBoxContainer = null;
-
-/**
- * Variable storing the messaging service.
- */
-let gvMessaging = null;
+/** Variable storing the messaging service. */
+let gvPipe = null;
+/** Variable storing the visual components service. */
+let gvComponents = null;
 
 /**
  * Initializes the MeetBox.
@@ -22,13 +18,15 @@ let gvMessaging = null;
 export function initialize(containerId, configuration) {
   trace = configuration.trace;
   gvConfiguration = configuration;
-  gvMessaging = new Messaging();
-  gvMessaging.initialize(gvConfiguration);
+  gvPipe = new Pipe();
+  gvPipe.initialize(gvConfiguration);
+  gvComponents = new Components();
   const externalContainer = window.document.getElementById(containerId);
   if (externalContainer) {
     deleteChildren(externalContainer);
     gvMeetBoxContainer = createMeetboxContainer();
     externalContainer.appendChild(gvMeetBoxContainer);
+    externalContainer.appendChild(gvComponents.initialize());
   } else {
     console.log('Container element with id = `' + containerId + '` was not found in document.');
   }
@@ -37,14 +35,16 @@ export function initialize(containerId, configuration) {
 /**
  * Opens a new meeting.
  *
- * @return {string|null} Identifier of the newly created meeting of null.
+ * @return {string|null} Identifier of the opened (owned) meeting channel.
  */
 export function openMeeting() {
   if (gvMeetBoxContainer) {
-    const ownerChannelId = 'd6b2bb79-60b4-4bc6-8aaf-ed924faf4db5'; //generateUUID(); //FIXME
-    gvMeetBoxContainer.appendChild(createIdIndicator(ownerChannelId, '#ffeb3b'))
-    gvMessaging.open(ownerChannelId);
-    return ownerChannelId;
+    const localChannelId = 'd6b2bb79-60b4-4bc6-8aaf-ed924faf4db5'; //generateUUID(); //FIXME
+    const indicator = createIdIndicator(localChannelId);
+    gvMeetBoxContainer.appendChild(indicator);
+    indicator.className = 'mbx-indicator';
+    gvPipe.open(localChannelId);
+    return localChannelId;
   } else {
     console.log('Call function `initialize` before calling function `createMeeting`.');
     return null;
@@ -52,15 +52,17 @@ export function openMeeting() {
 }
 
 /**
- * Joins the meeting.
+ * Joins an opened meeting.
  *
- * @param ownerChannelId Identifier of the channel of the meeting owner.
+ * @param remoteChannelId Identifier of the channel of the remote meeting owner.
  */
-export function joinMeeting(ownerChannelId) {
+export function joinMeeting(remoteChannelId) {
   if (gvMeetBoxContainer) {
-    const clientChannelId = generateUUID();
-    gvMeetBoxContainer.appendChild(createIdIndicator(ownerChannelId, '#f5f5f5'))
-    gvMessaging.join(ownerChannelId, clientChannelId);
+    const localChannelId = generateUUID();
+    const indicator = createIdIndicator(remoteChannelId);
+    gvMeetBoxContainer.appendChild(indicator);
+    indicator.className = 'mbx-indicator';
+    gvPipe.join(remoteChannelId, localChannelId);
   } else {
     console.log('Call function `initialize` before calling function `joinMeeting`.');
   }
@@ -73,25 +75,17 @@ export function joinMeeting(ownerChannelId) {
  */
 function createMeetboxContainer() {
   gvMeetBoxContainer = window.document.createElement('div');
-  gvMeetBoxContainer.style.backgroundColor = '#546e7a';
-  gvMeetBoxContainer.style.minWidth = '300px';
-  gvMeetBoxContainer.style.minHeight = '300px';
+  gvMeetBoxContainer.className = 'mbx-meet-box-container';
   return gvMeetBoxContainer;
 }
 
 /**
  *
  * @param uuid
- * @param color
  * @return {HTMLElement}
  */
-function createIdIndicator(uuid, color) {
+function createIdIndicator(uuid) {
   const indicator = window.document.createElement('div');
-  indicator.style.color = color;
-  indicator.style.fontSize = '1.6em';
-  indicator.style.fontStyle = 'bold';
-  indicator.style.padding = '12px';
-  indicator.style.textAlign = 'center';
   indicator.innerText = uuid;
   return indicator;
 }

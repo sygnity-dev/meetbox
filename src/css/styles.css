@@ -1,0 +1,208 @@
+.mbx-meet-box-container {
+    background-color: #546e7a;
+    width: 100%;
+}
+
+.mbx-streaming-container {
+}
+
+.mbx-indicator {
+    color: yellow;
+    background: transparent;
+    font-size: 1.6em;
+    font-style: normal;
+    font-weight: bold;
+    padding: 12px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.elv-streaming-bg-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-bg-color);
+    z-index: -100;
+}
+
+.elv-streaming-fg-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -99;
+}
+
+.elv-local-room-container {
+    position: absolute;
+    left: 200px;
+    top: 12px;
+    width: 350px;
+    height: 50px;
+    background-color: var(--main-bg-color);
+    border-radius: 25px;
+    z-index: inherit;
+}
+
+.elv-local-room-name {
+    position: relative;
+    left: 25px;
+    top: 13px;
+    width: 300px;
+    height: 25px;
+    font-size: 23px;
+    color: #dfdfdf;
+    background-color: #14354c;
+    text-align: center;
+    user-select: text;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+}
+
+.elv-remote-room-container {
+    position: absolute;
+    left: 200px;
+    top: 72px;
+    width: 350px;
+    height: 50px;
+    background-color: #dfdfdf;
+    border-radius: 25px;
+    z-index: inherit;
+}
+
+.elv-remote-room-name {
+    position: relative;
+    left: 25px;
+    top: 13px;
+    width: 300px;
+    height: 25px;
+    font-size: 23px;
+    border: none;
+    background-color: #dfdfdf;
+    outline: none;
+    text-align: center;
+    z-index: inherit;
+}
+
+.elv-streaming-phone-container {
+    position: absolute;
+    left: 560px;
+    top: 70px;
+    width: 54px;
+    height: 54px;
+    font-size: 40px;
+    z-index: inherit;
+}
+
+.elv-call-button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 54px;
+    height: 54px;
+    color: white;
+    border-radius: 27px;
+    display: none;
+    z-index: inherit;
+}
+
+.elv-begin-call {
+    background-color: green;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 54px;
+    height: 54px;
+    color: white;
+    border-radius: 27px;
+    display: none;
+    z-index: inherit;
+}
+
+.elv-end-call {
+    background-color: red;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 54px;
+    height: 54px;
+    color: white;
+    border-radius: 27px;
+    display: none;
+    z-index: inherit;
+}
+
+.elv-inactive-call {
+    background-color: gray;
+    cursor: default;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 54px;
+    height: 54px;
+    color: white;
+    border-radius: 27px;
+    display: none;
+    z-index: inherit;
+}
+
+.elv-telephone-icon {
+    position: relative;
+    left: 13px;
+    top: 3px;
+    width: 54px;
+    height: 54px;
+    z-index: inherit;
+}
+
+.elv-local-video-container {
+    position: relative;
+    left: 10px;
+    top: 150px;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: #dfdfdf;
+    z-index: inherit;
+}
+
+.elv-local-video {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    border: solid #dfdfdf 2px;
+    display: none;
+    z-index: inherit;
+}
+
+.elv-remote-video-container {
+    position: relative;
+    left: 280px;
+    top: 150px;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: #dfdfdf;
+    z-index: inherit;
+}
+
+.elv-remote-video {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    border: solid #dfdfdf 2px;
+    display: none;
+    z-index: inherit;
+}
