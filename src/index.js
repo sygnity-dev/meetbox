@@ -1,34 +1,50 @@
-const { v4: uuidv4 } = require('uuid');
+import {trace, generateUUID} from "./common"
+import {Messaging} from "./messaging"
 
-let meetboxContainer = null;
+/**
+ * Variable storing the configuration.
+ */
+let gvConfiguration = null;
+
+/**
+ * Variable storing the MeetBox container.
+ */
+let gvMeetBoxContainer = null;
+
+/**
+ * Variable storing the messaging service.
+ */
+let gvMessaging = null;
 
 /**
  * Initializes the MeetBox.
  */
-export function initialize(containerId) {
-  const container = window.document.getElementById(containerId);
-  if (container) {
-    // in case this function is called multiple times,
-    // clear the content of the external container,
-    deleteChildren(container);
-    // add MeetBox container as a child to the provided external container
-    const meetboxContainer = createMeetboxContainer();
-    container.appendChild(meetboxContainer);
+export function initialize(containerId, configuration) {
+  trace = configuration.trace;
+  gvConfiguration = configuration;
+  gvMessaging = new Messaging();
+  gvMessaging.initialize(gvConfiguration);
+  const externalContainer = window.document.getElementById(containerId);
+  if (externalContainer) {
+    deleteChildren(externalContainer);
+    gvMeetBoxContainer = createMeetboxContainer();
+    externalContainer.appendChild(gvMeetBoxContainer);
   } else {
     console.log('Container element with id = `' + containerId + '` was not found in document.');
   }
 }
 
 /**
- * Creates a new meeting.
+ * Opens a new meeting.
  *
  * @return {string|null} Identifier of the newly created meeting of null.
  */
-export function createMeeting() {
-  if (meetboxContainer) {
-    const uuid = createUUID();
-    meetboxContainer.appendChild(createIdIndicator(uuid, '#ffeb3b'))
-    return uuid;
+export function openMeeting() {
+  if (gvMeetBoxContainer) {
+    const ownerChannelId = 'd6b2bb79-60b4-4bc6-8aaf-ed924faf4db5'; //generateUUID(); //FIXME
+    gvMeetBoxContainer.appendChild(createIdIndicator(ownerChannelId, '#ffeb3b'))
+    gvMessaging.open(ownerChannelId);
+    return ownerChannelId;
   } else {
     console.log('Call function `initialize` before calling function `createMeeting`.');
     return null;
@@ -38,11 +54,13 @@ export function createMeeting() {
 /**
  * Joins the meeting.
  *
- * @param uuid Identifier of the meeting to join.
+ * @param ownerChannelId Identifier of the channel of the meeting owner.
  */
-export function joinMeeting(uuid) {
-  if (meetboxContainer) {
-    meetboxContainer.appendChild(createIdIndicator(uuid, '#f5f5f5'))
+export function joinMeeting(ownerChannelId) {
+  if (gvMeetBoxContainer) {
+    const clientChannelId = generateUUID();
+    gvMeetBoxContainer.appendChild(createIdIndicator(ownerChannelId, '#f5f5f5'))
+    gvMessaging.join(ownerChannelId, clientChannelId);
   } else {
     console.log('Call function `initialize` before calling function `joinMeeting`.');
   }
@@ -54,11 +72,11 @@ export function joinMeeting(uuid) {
  * @return {HTMLElement} DIV element encapsulating the MeetBox components.
  */
 function createMeetboxContainer() {
-  meetboxContainer = window.document.createElement('div');
-  meetboxContainer.style.backgroundColor = '#546e7a';
-  meetboxContainer.style.minWidth = '300px';
-  meetboxContainer.style.minHeight = '300px';
-  return meetboxContainer;
+  gvMeetBoxContainer = window.document.createElement('div');
+  gvMeetBoxContainer.style.backgroundColor = '#546e7a';
+  gvMeetBoxContainer.style.minWidth = '300px';
+  gvMeetBoxContainer.style.minHeight = '300px';
+  return gvMeetBoxContainer;
 }
 
 /**
@@ -93,13 +111,4 @@ function deleteChildren(element) {
   } else {
     console.log('Invalid element passed to `deleteChildren function: ', element);
   }
-}
-
-/**
- * Generates new UUID.
- *
- * @return {string} Newly created UUID.
- */
-function createUUID() {
-  return uuidv4();
 }

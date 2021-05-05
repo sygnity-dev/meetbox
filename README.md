@@ -40,16 +40,16 @@ filled with chocolate background.
 
 ### Creating a meeting
 
-To create a new meeting, just call the function `createMeeting`, and send the meeting identifier to
-other party that should join the same meeting:
+To immediately open a new meeting, just call the function `openMeeting`,
+and send the meeting identifier to other party that should join the same meeting:
 
 ```js
-const uuid = window.meetbox.createMeeting();
+const uuid = window.meetbox.openMeeting();
 ```
 
 ### Join a meeting
 
-To join a meeting, pass the meeting identifier to the function `joinMeeting`:  
+To join an opened meeting, pass the meeting identifier to the function `joinMeeting`:  
 
 ```js
 window.meetbox.joinMeeting(uuid);
