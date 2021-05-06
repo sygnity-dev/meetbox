@@ -1,5 +1,14 @@
 const {v4: uuidv4} = require('uuid');
 
+export const common = new Common();
+
+function Common() {
+}
+
+Common.prototype.uuid = function () {
+  return uuidv4();
+}
+
 /**
  * Flag indicating if tracing is enabled.
  */
