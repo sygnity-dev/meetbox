@@ -1,99 +1,67 @@
+/*
+ * Copyright (c) 2017-2021 Dariusz Depta Engos Software
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+import {logger} from "./logger.js";
 const {v4: uuidv4} = require('uuid');
 
-export const common = new Common();
-
-function Common() {
-}
-
-Common.prototype.uuid = function () {
-  return uuidv4();
-}
-
 /**
- * Flag indicating if tracing is enabled.
+ * Common module.
  */
-export let trace = false;
+export const common = (function () {
 
-/**
- * Generates new UUID.
- *
- * @return {string} Newly created UUID.
- */
-export function generateUUID() {
-  return uuidv4();
-}
+  /**
+   * Flag indicating whether this component runs on device with touch capabilities.
+   */
+  const touch = ('ontouchstart' in window);
 
-/**
- * Global flag indicating whether this application runs on device with touch capabilities.
- */
-const gvTouch = ('ontouchstart' in window);
-
-/**
- * Global flag indicating whether tracing is enabled.
- */
-const gvTraceEnabled = true;
-
-/**
- * Adds touch or mouse event to specified element.
- */
-function common_addTouch(pmElement, pmHandler) {
-  pmElement.addEventListener(gvTouch ? "touchstart" : "mousedown", pmHandler, false);
-}
-
-/**
- * Adds touch or mouse event to element with specified identifier.
- */
-export function common_addTouchById(pmElementId, pmHandler) {
-  const lvElement = document.getElementById(pmElementId);
-  common_addTouch(lvElement, pmHandler);
-}
-
-/**
- * Sets element's text.
- */
-export function common_setText(pmElement, pmText) {
-  if (pmElement) {
-    pmElement.firstChild.textContent = pmText;
+  /**
+   *
+   * @return {*|string}
+   */
+  const uuid = () => {
+    return uuidv4();
   }
-}
 
-/**
- * Gets element's value.
- */
-function common_getValue(pmElement) {
-  if (pmElement) {
-    return pmElement.value;
+  /**
+   * Adds touch or mouse event to specified element.
+   */
+  const addTouch = (element, handler) => {
+    if (element) {
+      element.addEventListener(touch ? "touchstart" : "mousedown", handler, false);
+    } else {
+      logger.error('element with id `' + element + '` not found');
+    }
   }
-  return null;
-}
 
-/**
- * Gets element's value.
- */
-export function common_getValueById(pmElementId) {
-  return common_getValue(document.getElementById(pmElementId));
-}
+  /**
+   * Adds touch or mouse event to element with specified identifier.
+   */
+  const addTouchById = (elementId, handler) => {
+    addTouch(window.document.getElementById(elementId), handler);
+  }
 
-/**
- *
- * @param pmMessage
- */
-export function common_log(pmMessage) {
-  console.log(pmMessage);
-}
-
-/**
- *
- * @param pmText
- */
-export function common_trace(pmText) {
-  console.log('TRACE: ' + (window.performance.now() / 1000).toFixed(3) + ' | ' + Date.now() + ': ' + pmText);
-}
-
-/**
- *
- * @param pmError
- */
-export function common_error(pmError) {
-  console.log('ERROR: ' + pmError);
-}
+  return {
+    uuid: uuid,
+    addTouch:addTouch,
+    addTouchById:addTouchById
+  }
+})();

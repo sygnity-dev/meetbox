@@ -1,3 +1,25 @@
+/*
+ * Copyright (c) 2017-2021 Dariusz Depta Engos Software
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 const PubNub = require('pubnub');
 import {common} from "./common.js"
 import {logger} from "./logger.js";
@@ -160,10 +182,10 @@ Pipe.prototype.startLocalStreaming = function (messageType) {
     .then(function (mediaStream) {
       logger.info('acquired local stream');
       gui.showLocalVideo();
-      gui.localVideo().srcObject = mediaStream;
-      gui.localVideo().onloadedmetadata = function (_event) {
-        gui.localVideo().play();
-        gui.localVideo().muted = true;
+      gui.getLocalVideo().srcObject = mediaStream;
+      gui.getLocalVideo().onloadedmetadata = function (_event) {
+        gui.getLocalVideo().play();
+        gui.getLocalVideo().muted = '';
         logger.info('started to PLAY LOCAL stream');
       };
       me.localStream = mediaStream;
@@ -272,6 +294,38 @@ Pipe.prototype.close = function () {
   gui.hideRemoteVideo();
 };
 
+Pipe.prototype.micOn = function () {
+  if (this.localStream) {
+    for (let i = 0; i < this.localStream.getAudioTracks().length; i++) {
+      this.localStream.getAudioTracks()[i].enabled = true;
+    }
+  }
+}
+
+Pipe.prototype.micOff = function () {
+  if (this.localStream) {
+    for (let i = 0; i < this.localStream.getAudioTracks().length; i++) {
+      this.localStream.getAudioTracks()[i].enabled = false;
+    }
+  }
+}
+
+Pipe.prototype.camOn = function () {
+  if (this.localStream) {
+    for (let i = 0; i < this.localStream.getVideoTracks().length; i++) {
+      this.localStream.getVideoTracks()[i].enabled = true;
+    }
+  }
+}
+
+Pipe.prototype.camOff = function () {
+  if (this.localStream) {
+    for (let i = 0; i < this.localStream.getVideoTracks().length; i++) {
+      this.localStream.getVideoTracks()[i].enabled = false;
+    }
+  }
+}
+
 Pipe.prototype.onTrack = function (event) {
   logger.info('PEER acquired REMOTE stream:', event);
   this.remoteStream = event.streams[0];
@@ -279,7 +333,7 @@ Pipe.prototype.onTrack = function (event) {
   gui.remoteVideo().srcObject = this.remoteStream;
   gui.remoteVideo().onloadedmetadata = function (_event) {
     gui.remoteVideo().play();
-    gui.remoteVideo().muted = true;
+    gui.remoteVideo().muted = '';
     logger.info('started to PLAY REMOTE stream');
   }
 }
