@@ -264,13 +264,7 @@ Pipe.prototype.close = function () {
   this.localStream = null;
   if (this.peerConnection) {
     logger.info('closing PEER connection');
-    this.peerConnection.close()
-      .then(() => {
-        logger.info('PEER connection closed.');
-      })
-      .catch((reason) => {
-        logger.error('failed to close PEER connection, reason:', reason);
-      });
+    this.peerConnection.close();
   }
   this.peerConnection = null;
 };
