@@ -21,7 +21,7 @@ $ npm i --save meetbox
 - [PubNub](https://www.pubnub.com)
 - [XirSys](https://xirsys.com)
 
-To properly configure **MeetBox** accounts in both services are needed.
+To properly configure **MeetBox**, accounts in both services are needed.
 
 There are free and commercial plans available in both of them:
 - PubNub: https://www.pubnub.com/pricing
