@@ -27,12 +27,16 @@ export function initialize(containerId, configuration) {
  *
  * @return {string|null} Identifier of the opened (owned) meeting channel.
  */
-export function openMeeting() {
+export function openMeeting(localChannelId) {
   if (gui.meetBoxContainer) {
-    const localChannelId = 'd6b2bb79-60b4-4bc6-8aaf-ed924faf4db5'; //common.uuid(); //FIXME
-    gui.meetBoxContainer.appendChild(gui.createIdIndicator(localChannelId));
-    pipe.open(localChannelId);
-    return localChannelId;
+    if (localChannelId) {
+      pipe.open(localChannelId);
+      return localChannelId;
+    } else {
+      const generatedLocalChannelId = common.uuid();
+      pipe.open(generatedLocalChannelId);
+      return generatedLocalChannelId;
+    }
   } else {
     console.log('Call function `initialize` before calling function `createMeeting`.');
     return null;
@@ -46,9 +50,8 @@ export function openMeeting() {
  */
 export function joinMeeting(remoteChannelId) {
   if (gui.meetBoxContainer) {
-    const localChannelId = common.uuid();
-    gui.meetBoxContainer.appendChild(gui.createIdIndicator(remoteChannelId));
-    pipe.join(remoteChannelId, localChannelId);
+    const generatedLocalChannelId = common.uuid();
+    pipe.join(remoteChannelId, generatedLocalChannelId);
   } else {
     console.log('Call function `initialize` before calling function `joinMeeting`.');
   }
