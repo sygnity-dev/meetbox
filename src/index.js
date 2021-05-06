@@ -16,7 +16,7 @@ export function init(containerId, configuration) {
   if (externalContainer) {
     gui.deleteAllChildren(externalContainer);
     externalContainer.appendChild(gui.createMeetboxContainer());
-    externalContainer.appendChild(gui.createStreamingContainer());
+    gui.init();
   } else {
     logger.error('external container element identified by `' + containerId + '` does not exist');
   }
@@ -28,7 +28,7 @@ export function init(containerId, configuration) {
  * @return {string|null} Identifier of the opened (owned) meeting channel.
  */
 export function openMeeting(localChannelId) {
-  if (gui.meetBoxContainer) {
+  if (gui.meetBoxContainer()) {
     if (localChannelId) {
       pipe.open(localChannelId);
       logger.info('opening meeting with given LOCAL channel id: ' + localChannelId);
@@ -51,7 +51,7 @@ export function openMeeting(localChannelId) {
  * @param remoteChannelId Identifier of the channel of the remote meeting owner.
  */
 export function joinMeeting(remoteChannelId) {
-  if (gui.meetBoxContainer) {
+  if (gui.meetBoxContainer()) {
     const generatedLocalChannelId = common.uuid();
     pipe.join(remoteChannelId, generatedLocalChannelId);
     logger.info('joining meeting with REMOTE channel id: ' + remoteChannelId + ' and LOCAL channel id: ' + generatedLocalChannelId);

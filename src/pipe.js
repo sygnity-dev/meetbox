@@ -159,6 +159,7 @@ Pipe.prototype.startLocalStreaming = function (messageType) {
   navigator.mediaDevices.getUserMedia(constraints)
     .then(function (mediaStream) {
       logger.info('acquired local stream');
+      gui.showLocalVideo();
       gui.localVideo().srcObject = mediaStream;
       gui.localVideo().onloadedmetadata = function (_event) {
         gui.localVideo().play();
@@ -267,11 +268,14 @@ Pipe.prototype.close = function () {
     this.peerConnection.close();
   }
   this.peerConnection = null;
+  gui.hideLocalVideo();
+  gui.hideRemoteVideo();
 };
 
 Pipe.prototype.onTrack = function (event) {
   logger.info('PEER acquired REMOTE stream:', event);
   this.remoteStream = event.streams[0];
+  gui.showRemoteVideo();
   gui.remoteVideo().srcObject = this.remoteStream;
   gui.remoteVideo().onloadedmetadata = function (_event) {
     gui.remoteVideo().play();
