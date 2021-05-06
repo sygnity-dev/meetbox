@@ -39,7 +39,7 @@ For development and testing purposes, free plans are sufficient.
 </head>
 <body>
   <div id="any-element-identifier"></div>
-  <script src="https://unpkg.com/meetbox@0.0.18"></script>
+  <script src="https://unpkg.com/meetbox@0.0.20"></script>
   <script>
     let configuration = {
       trace: true, // flag indicating whether tracing messages will be displayed in the console
