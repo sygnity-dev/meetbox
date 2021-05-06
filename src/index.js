@@ -8,7 +8,7 @@ import {ice} from "./ice.js"
 /**
  * Initializes the MeetBox.
  */
-export function initialize(containerId, configuration) {
+export function init(containerId, configuration) {
   logger.init(configuration.trace);
   ice.init(configuration);
   pipe.init(configuration);
@@ -18,7 +18,7 @@ export function initialize(containerId, configuration) {
     externalContainer.appendChild(gui.createMeetboxContainer());
     externalContainer.appendChild(gui.createStreamingContainer());
   } else {
-    console.log('Container element with id = `' + containerId + '` was not found in document.');
+    logger.error('external container element identified by `' + containerId + '` does not exist');
   }
 }
 
@@ -31,14 +31,16 @@ export function openMeeting(localChannelId) {
   if (gui.meetBoxContainer) {
     if (localChannelId) {
       pipe.open(localChannelId);
+      logger.info('opening meeting with given LOCAL channel id: ' + localChannelId);
       return localChannelId;
     } else {
       const generatedLocalChannelId = common.uuid();
       pipe.open(generatedLocalChannelId);
+      logger.info('opening meeting with generated LOCAL channel id: ' + generatedLocalChannelId);
       return generatedLocalChannelId;
     }
   } else {
-    console.log('Call function `initialize` before calling function `createMeeting`.');
+    logger.error('call `init` function before opening a meeting');
     return null;
   }
 }
@@ -52,7 +54,8 @@ export function joinMeeting(remoteChannelId) {
   if (gui.meetBoxContainer) {
     const generatedLocalChannelId = common.uuid();
     pipe.join(remoteChannelId, generatedLocalChannelId);
+    logger.info('joining meeting with REMOTE channel id: ' + remoteChannelId + ' and LOCAL channel id: ' + generatedLocalChannelId);
   } else {
-    console.log('Call function `initialize` before calling function `joinMeeting`.');
+    logger.error('call `init` function before joining a meeting');
   }
 }
