@@ -6,7 +6,10 @@
     "WebRTC",
     "library",
     "meet",
-    "box"
+    "box",
+    "meetbox",
+    "audio",
+    "video"
   ],
   "author": "Dariusz Depta",
   "license": "MIT",

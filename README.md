@@ -13,8 +13,9 @@ Please come back soon, to check again the status.
 functionality, supported by WebRTC technology available in all modern browsers.
 
 **MeetBox** helps to integrate simple audio and video functionality with your web page,
-with minimum effort and cost, just to verify if this technology may be potentially adopted
-by your customers.
+with minimum effort and cost, just to verify whether this technology will be adopted
+by your customers. In case the prototyping phase using **MeetBox** was a success,
+more matured solutions may be adopted to your needs.
 
 **MeetBox** does not aim to be a replacement for such products like:
 - Microsoft Teams,
@@ -25,7 +26,7 @@ by your customers.
 ## Introduction
 
 Current version of **MeetBox** allows establishing audio and video communication channel
-in peer-to-peer mode between two participants (no group meetings).
+in peer-to-peer mode, between two participants (no group meetings).
 One participant (called meeting's owner) opens a new meeting,
 and the other one (called meeting's client) just joins it. As simply as that.
 
@@ -56,12 +57,11 @@ $ npm i --save meetbox
 - [XirSys](https://xirsys.com).
 
 Accounts in these services are required to use **MeetBox**.
-
-There are free and commercial plans available in both of them, see:
+There are free and commercial plans available, details may be found here:
 - [PubNub pricing](https://www.pubnub.com/pricing),
 - [XirSys pricing](https://xirsys.com/pricing).
 
-For development and testing purposes, free plans are sufficient.
+For prototyping purposes, free plans are sufficient.
 
 ## Usage
 
@@ -112,7 +112,8 @@ const meetingId = window.meetbox.openMeeting();
 ### Sending a meeting's identifier between owner and client
 
 Meeting's owner has to send the meeting's identifier to meeting's client, somehow.
-It is up to you (or your application) how it is done. Sending identifiers is **not in the scope of this library**.
+It is up to you (or your application) how it is done.
+Sending identifiers between participants **is out of scope of this library**.
 
 ### Joining a meeting by meeting's client
 
