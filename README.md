@@ -5,7 +5,41 @@ The WebRTC library.
 ## Status
 
 Currently, this library is in testing phase.
-Please come back soon to check the status again.
+Please come back soon, to check again the status.
+
+## Overview
+
+**MeetBox** is a JavaScript library, that provides audio and video communication
+functionality, supported by WebRTC technology available in all modern browsers.
+
+**MeetBox** helps to integrate simple audio and video functionality with your web page,
+with minimum effort and cost, just to verify if this technology may be potentially adopted
+by your customers.
+
+**MeetBox** does not aim to be a replacement for such products like:
+- Microsoft Teams,
+- Google Meet,
+- Zoom,
+- ...and many others.
+
+## Introduction
+
+Current version of **MeetBox** allows establishing audio and video communication channel
+in peer-to-peer mode between two participants (no group meetings).
+One participant (called meeting's owner) opens a new meeting,
+and the other one (called meeting's client) just joins it. As simply as that.
+
+The basic scenario looks like this:
+1. Meeting's owner opens a new meeting.
+2. Meeting's owner sends the meeting's identifier to meeting's client.
+3. Meeting's client, having a meeting's identifier, joins the meeting.
+4. Both parties communicate using audio and/or video channel. 
+5. When the meeting is over, each participant may close it.
+6. After closing, the meeting's identifier is invalidated and useless. 
+
+**MeetBox** supports all steps in this scenario, **EXCEPT STEP 2**.
+Sending meeting's identifier from meeting's owner to meeting's client is out of scope of this library.
+Sending meeting's identifier must be implemented in secured way by your application.
 
 ## Installation
 
@@ -17,63 +51,76 @@ $ npm i --save meetbox
 
 ## Dependencies
 
-**MeetBox** requires two services to operate:
-- [PubNub](https://www.pubnub.com)
-- [XirSys](https://xirsys.com)
+**MeetBox** requires the following external services to operate:
+- [PubNub](https://www.pubnub.com),
+- [XirSys](https://xirsys.com).
 
-To properly configure **MeetBox**, accounts in both services are needed.
+Accounts in these services are required to use **MeetBox**.
 
-There are free and commercial plans available in both of them:
-- PubNub: https://www.pubnub.com/pricing
-- XirSys: https://xirsys.com/pricing
+There are free and commercial plans available in both of them, see:
+- [PubNub pricing](https://www.pubnub.com/pricing),
+- [XirSys pricing](https://xirsys.com/pricing).
 
 For development and testing purposes, free plans are sufficient.
 
-## Configuration
+## Usage
+
+### MeetBox initialization in web page
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>MeetBox</title>
-</head>
-<body>
-  <div id="any-element-identifier"></div>
-  <script src="https://unpkg.com/meetbox@0.0.21"></script>
-  <script>
-    let configuration = {
-      trace: true, // flag indicating whether tracing messages will be displayed in the console
-      pubNub: {
-        publishKey: 'your-publish-key-acquired-from-PubNub',
-        subscribeKey: 'your-subscribe-key-acquired-from-PubNub',
-      },
-      xirSys: {
-        apiPath: 'https://global.xirsys.net',
-        channel: 'your-channel-name-acquired-from-XirSys',
-        ident: 'your-identifier-acquired-from-XirSys',
-        secret: 'your-secret-key-acquired-from-XirSys',
-      }
-    };
-    window.meetbox.init('any-element-identifier-but-the-same-as', configuration);
-  </script>
-</body>
+  <head>
+    <title>MeetBox</title>
+    <script src="https://unpkg.com/meetbox@0.0.22"></script>
+  </head>
+  <body>
+    <!-- prepare a container to inject MeetBox -->
+    <div id="my-meetbox-container-identifier"></div>
+    <script>
+      // prepare configuration
+      let configuration = {
+        trace: false, // log tracing messages?
+        pubNub: {
+          publishKey: 'your-publish-key-acquired-from-PubNub',
+          subscribeKey: 'your-subscribe-key-acquired-from-PubNub',
+        },
+        xirSys: {
+          apiPath: 'https://global.xirsys.net',
+          channel: 'your-channel-name-acquired-from-XirSys',
+          ident: 'your-identifier-acquired-from-XirSys',
+          secret: 'your-secret-key-acquired-from-XirSys',
+        }
+      };
+      // initialize MeetBox
+      window.meetbox.init('my-meetbox-container-identifier', configuration);
+    </script>
+  </body>
 </html>
 ```
 
-### Opening a meeting
+### Opening a meeting by meeting's owner
 
-To immediately open a new meeting, just call the function `openMeeting`,
-and send the meeting identifier to other party that should join the same meeting:
+To immediately open a new meeting, the meeting's owner calls `openMeeting` function,
+and acquires the meeting's identifier.
 
 ```js
+// open a new meeting, somwhere in your application
 const meetingId = window.meetbox.openMeeting();
 ```
 
-### Join a meeting
+### Sending a meeting's identifier between owner and client
 
-To join an opened meeting, pass the meeting identifier acquired from other party to `joinMeeting` function:  
+Meeting's owner has to send the meeting's identifier to meeting's client, somehow.
+It is up to you (or your application) how it is done. Sending identifiers is **not in the scope of this library**.
+
+### Joining a meeting by meeting's client
+
+Meeting's client, having the meeting's identifier, may join an opened meeting,
+just by passing the meeting's identifier to `joinMeeting` function:  
 
 ```js
+// join an opened meeting, somewhere in your application
 window.meetbox.joinMeeting(meetingId);
 ```
 
