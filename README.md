@@ -1,3 +1,5 @@
+![MeetBox](doc/meetbox.png)
+
 # MeetBox
 
 The WebRTC library.
