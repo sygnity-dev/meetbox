@@ -1,8 +1,6 @@
-![MeetBox](doc/meetbox.png)
+![MeetBox](doc/meetbox.png | width=50%)
 
 # MeetBox
-
-<img alt="MeetBox" src="doc/meetbox.png" width="300"/>
 
 The WebRTC library.
 
