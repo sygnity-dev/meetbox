@@ -1,4 +1,4 @@
-![MeetBox](doc/meetbox.png | width=50%)
+![MeetBox](doc/meetbox.png | width=400)
 
 # MeetBox
 
