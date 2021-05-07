@@ -1,4 +1,4 @@
-![MeetBox](doc/meetbox.png | width=400)
+![](doc/meetbox.png)
 
 # MeetBox
 
