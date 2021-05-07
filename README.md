@@ -2,6 +2,8 @@
 
 # MeetBox
 
+<img alt="MeetBox" src="doc/meetbox.png" style="width:300px"/>
+
 The WebRTC library.
 
 ## Status
