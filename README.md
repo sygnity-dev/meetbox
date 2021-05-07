@@ -2,7 +2,7 @@
 
 # MeetBox
 
-<img alt="MeetBox" src="doc/meetbox.png" style="width:300px"/>
+<img alt="MeetBox" src="doc/meetbox.png" width="300"/>
 
 The WebRTC library.
 
