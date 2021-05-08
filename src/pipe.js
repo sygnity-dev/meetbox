@@ -43,6 +43,7 @@ function Pipe() {
   this.publishChannel = null;
   this.localStream = null;
   this.peerConnection = null;
+  this.onCloseExternalHandler = null;
 }
 
 Pipe.prototype.init = function (configuration) {
@@ -292,6 +293,9 @@ Pipe.prototype.close = function () {
   this.peerConnection = null;
   gui.hideLocalVideo();
   gui.hideRemoteVideo();
+  if (this.onCloseExternalHandler) {
+    this.onCloseExternalHandler();
+  }
 };
 
 Pipe.prototype.micOn = function () {
@@ -366,4 +370,8 @@ Pipe.prototype.onIceConnectionStateChange = function (_event) {
         break;
     }
   }
+}
+
+Pipe.prototype.setOnCloseExternal = function (handler) {
+  this.onCloseExternalHandler = handler;
 }

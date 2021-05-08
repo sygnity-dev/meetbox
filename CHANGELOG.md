@@ -1,3 +1,8 @@
+## 0.0.24 (May 8, 2021)
+
+- Added **closeMeeting** function to API.
+- Added **setOnClose** function to API.
+
 ## 0.0.20 (May 6, 2021)
 
 - MeetBox dynamically created inside parent component.

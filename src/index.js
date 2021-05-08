@@ -28,7 +28,8 @@ import {pipe} from "./pipe.js"
 import {ice} from "./ice.js"
 
 /**
- * Initializes the MeetBox.
+ * Initializes the MeetBox component.
+ * //TODO more details
  */
 export function init(containerId, configuration) {
   logger.init(configuration.trace);
@@ -39,36 +40,42 @@ export function init(containerId, configuration) {
     gui.deleteAllChildren(externalContainer);
     externalContainer.appendChild(gui.createMeetboxContainer());
     gui.init();
+    const pageHideHandler = () => {
+      pipe.close();
+    };
+    window.addEventListener('pagehide', pageHideHandler);
   } else {
-    logger.error('external container element identified by `' + containerId + '` does not exist');
+    logger.error(`MeetBox container element with id = '${containerId}' was not found in document.`, `Check the value of parameter 'containerId' passed to function 'init'.`);
   }
 }
 
 /**
- * Opens a new meeting.
+ * Opens a new meeting and returns the meeting's identifier.
+ * //TODO more details
  *
- * @return {string|null} Identifier of the opened (owned) meeting channel.
+ * @return {string|null} Identifier of the meeting to be opened.
  */
 export function openMeeting(localChannelId) {
   if (gui.meetBoxContainer()) {
     if (localChannelId) {
       pipe.open(localChannelId);
-      logger.info('opening meeting with given LOCAL channel id: ' + localChannelId);
+      logger.info(`Opening a meeting with given channel identifier`, `LOCAL channel identifier = '${localChannelId}'.`);
       return localChannelId;
     } else {
       const generatedLocalChannelId = common.uuid();
       pipe.open(generatedLocalChannelId);
-      logger.info('opening meeting with generated LOCAL channel id: ' + generatedLocalChannelId);
+      logger.info(`Opening a meeting with generated channel identifier`, `LOCAL channel identifier = ${generatedLocalChannelId}'.`);
       return generatedLocalChannelId;
     }
   } else {
-    logger.error('call `init` function before opening a meeting');
+    logger.error(`MeetBox is not yet initialized.`,`call function 'init' before calling function 'openMeeting'`);
     return null;
   }
 }
 
 /**
  * Joins an opened meeting.
+ * //TODO more details
  *
  * @param remoteChannelId Identifier of the channel of the remote meeting owner.
  */
@@ -76,8 +83,33 @@ export function joinMeeting(remoteChannelId) {
   if (gui.meetBoxContainer()) {
     const generatedLocalChannelId = common.uuid();
     pipe.join(remoteChannelId, generatedLocalChannelId);
-    logger.info('joining meeting with REMOTE channel id: ' + remoteChannelId + ' and LOCAL channel id: ' + generatedLocalChannelId);
+    logger.info(`Joining a meeting with REMOTE channel identifier = '${remoteChannelId} and LOCAL channel identifier = '${generatedLocalChannelId}'.`);
   } else {
-    logger.error('call `init` function before joining a meeting');
+    logger.error(`MeetBox is not yet initialized.`,`call function 'init' before calling function 'joinMeeting'`);
+  }
+}
+
+/**
+ * Closes an opened meeting immediately.
+ * //TODO more details
+ */
+export function closeMeeting() {
+  if (gui.meetBoxContainer()) {
+    pipe.close();
+  } else {
+    logger.error(`MeetBox is not yet initialized.`,`call function 'init' before calling function 'closeMeeting'`);
+  }
+}
+
+/**
+ * Assigns a handler triggered when the connection is closed.
+ *
+ * @param handler Handler called when the connection is closed.
+ */
+export function setOnClose(handler) {
+  if (gui.meetBoxContainer()) {
+    pipe.setOnCloseExternal(handler);
+  } else {
+    logger.error(`MeetBox is not yet initialized.`,`call function 'init' before calling function 'setOnClose'`);
   }
 }

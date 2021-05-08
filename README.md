@@ -74,7 +74,7 @@ For prototyping purposes, free plans are sufficient.
 <html lang="en">
   <head>
     <title>MeetBox</title>
-    <script src="https://unpkg.com/meetbox@0.0.23"></script>
+    <script src="https://unpkg.com/meetbox@0.0.24"></script>
   </head>
   <body>
     <!-- prepare a container to inject MeetBox -->
@@ -126,6 +126,16 @@ just by passing the meeting's identifier to `joinMeeting` function:
 // join an opened meeting, somewhere in your application
 window.meetbox.joinMeeting(meetingId);
 ```
+
+## MeetBox API
+
+**MeetBox** methods:
+
+- init
+- openMeeting
+- joinMeeting
+- closeMeeting
+- setOnClose
 
 ## Documentation
 
