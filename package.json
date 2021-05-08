@@ -1,6 +1,6 @@
 {
   "name": "meetbox",
-  "version": "0.0.25",
+  "version": "0.1.0",
   "description": "The WebRTC library.",
   "keywords": [
     "WebRTC",

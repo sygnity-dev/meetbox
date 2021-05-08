@@ -74,7 +74,7 @@ For prototyping purposes, free plans are sufficient.
 <html lang="en">
   <head>
     <title>MeetBox</title>
-    <script src="https://unpkg.com/meetbox@0.0.25"></script>
+    <script src="https://unpkg.com/meetbox@0.1.0"></script>
   </head>
   <body>
     <!-- prepare a container to inject MeetBox -->

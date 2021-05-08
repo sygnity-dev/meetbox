@@ -18,6 +18,12 @@
 
 # Changelog history
 
+### 0.1.0 (May 8, 2021)
+
+- Improved UI styling.
+- Added PubNub unsubscribe.
+- Improved sequential connecting with the same meeting identifier.
+
 ### 0.0.24 (May 8, 2021)
 
 - Added **closeMeeting** function to API.
