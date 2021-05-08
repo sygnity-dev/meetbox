@@ -1,11 +1,20 @@
 # Current status
 
-| Feature          |  Status   | Remarks   |
-| ---------------- | --------- | --------- |
-| Video streaming  | Done      |           |
-| Audio streaming  | Done      |           |
-| Video on/off     | Done      |           |
-| Audio on/off     | Done      |           |
+|  Feature               |  Status   |  Remarks  |
+| ---------------------- | --------- | --------- |
+| Video streaming        | Done      |           |
+| Audio streaming        | Done      |           |
+| Video on/off           | Done      |           |
+| Audio on/off           | Done      |           |
+| Open meeting           | Done      |           |
+| Join meeting           | Done      |           |
+| Close meeting          | Done      |           |
+| One-to-one meeting     | Done      |           |
+| Group meeting          | Planned   |           |
+| One-to-one chat        | Planned   |           |
+| Group chat             | Planned   |           |
+| Screen sharing         | Planned   |           |
+| File transfer          | Planned   |           |
 
 # Changelog history
 
