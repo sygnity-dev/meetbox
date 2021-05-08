@@ -48,7 +48,6 @@ function Pipe() {
 
 Pipe.prototype.init = function (configuration) {
   const me = this;
-  logger.info('PIPE configuration:', configuration);
   this.pubNub = new PubNub({
     publishKey: configuration.pubNub.publishKey,
     subscribeKey: configuration.pubNub.subscribeKey,
@@ -64,7 +63,7 @@ Pipe.prototype.init = function (configuration) {
       message: (messageEvent) => {
         const message = messageEvent.message;
         if (message) {
-          logger.info('RECEIVED[' + message.messageType + ']', message.messagePayload);
+          logger.info(`RECEIVED[${message.messageType}]`, message.messagePayload);
           me.processMessage(message)
         }
       },
@@ -78,6 +77,7 @@ Pipe.prototype.init = function (configuration) {
 }
 
 Pipe.prototype.open = function (localChannelId) {
+  this.pubNub.unsubscribeAll();
   this.subscribeChannel = localChannelId;
   this.pubNub.subscribe({
     channels: [this.subscribeChannel]
@@ -85,6 +85,7 @@ Pipe.prototype.open = function (localChannelId) {
 };
 
 Pipe.prototype.join = function (remoteChannelId, localChannelId) {
+  this.pubNub.unsubscribeAll();
   this.subscribeChannel = localChannelId;
   this.publishChannel = remoteChannelId;
   this.pubNub.subscribe({
@@ -94,7 +95,7 @@ Pipe.prototype.join = function (remoteChannelId, localChannelId) {
 };
 
 Pipe.prototype.send = function (messageType, messagePayload) {
-  logger.info('SENDING[' + messageType + ']', messagePayload);
+  logger.info(`SENDING[${messageType}]`, messagePayload);
   this.pubNub.publish({
     channel: this.publishChannel,
     message: {
@@ -280,14 +281,14 @@ Pipe.prototype.close = function () {
     this.send(MSG_CLOSE, true);
   }
   if (this.localStream) {
-    logger.info('closing LOCAL stream');
+    logger.info('Closing LOCAL stream.');
     for (let i = 0; i < this.localStream.getTracks().length; i++) {
       this.localStream.getTracks()[i].stop();
     }
   }
   this.localStream = null;
   if (this.peerConnection) {
-    logger.info('closing PEER connection');
+    logger.info('Closing PEER connection.');
     this.peerConnection.close();
   }
   this.peerConnection = null;
