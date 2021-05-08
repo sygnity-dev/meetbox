@@ -68,9 +68,8 @@
   background: transparent;
   border: none;
   width: 30%;
-  border-radius: 18px;
   align-self: flex-end;
-  margin: 10px;
+  margin: 0 10px 14px 0;
 }
 
 .mbx-button-container {
@@ -82,17 +81,7 @@
   flex-wrap: nowrap;
 }
 
-.mbx-close-button {
-  background-color: red;
-  border: solid 2px #9a9999;
-  margin: 10px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  align-self: flex-end;
-  cursor: pointer;
-}
-
+.mbx-close-button,
 .mbx-mic-off-button,
 .mbx-mic-on-button,
 .mbx-cam-off-button,
@@ -100,9 +89,13 @@
   border: solid 2px #9a9999;
   width: 30px;
   height: 30px;
-  margin: 10px;
+  margin: 14px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.mbx-close-button {
+  background-color: #d20000;
 }
 
 .mbx-mic-off-button {

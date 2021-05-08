@@ -44,6 +44,7 @@ function Pipe() {
   this.localStream = null;
   this.peerConnection = null;
   this.onCloseExternalHandler = null;
+  this.userMediaConstraints = null;
 }
 
 Pipe.prototype.init = function (configuration) {
@@ -73,6 +74,16 @@ Pipe.prototype.init = function (configuration) {
     })
   } else {
     logger.error('PUBNUB not initialized');
+  }
+  // prepare constraints for acquiring user media
+  if (configuration && configuration.userMediaConstraints) {
+    this.userMediaConstraints = configuration.userMediaConstraints;
+  } else {
+    // by default both audio and video are requested
+    this.userMediaConstraints = {
+      audio: true,
+      video: true
+    };
   }
 }
 
@@ -163,24 +174,13 @@ Pipe.prototype.processMessage = function (message) {
 }
 
 /**
- * Starts the local streaming.
+ * Starts local streaming.
  */
 Pipe.prototype.startLocalStreaming = function (messageType) {
   logger.info('starting local streaming...');
   const me = this;
   this.localStream = null;
-  const constraints = {
-    audio: true,
-    video: {
-      mandatory: {
-        minWidth: 1280,
-        minHeight: 720,
-        maxWidth: 1920,
-        maxHeight: 1080
-      }
-    }
-  };
-  navigator.mediaDevices.getUserMedia(constraints)
+  navigator.mediaDevices.getUserMedia(this.userMediaConstraints)
     .then(function (mediaStream) {
       logger.info('acquired local stream');
       gui.showLocalVideo();

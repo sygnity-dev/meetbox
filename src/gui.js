@@ -64,8 +64,13 @@ export const gui = (function () {
   /**
    *
    */
-  const init = () => {
+  const init = (configuration) => {
     localVideo = window.document.getElementById('mbxLocalVideo');
+    if (localVideo && configuration && configuration.localVideo) {
+      if (configuration.localVideo.width) {
+        localVideo.style.width = configuration.localVideo.width;
+      }
+    }
     hideLocalVideo();
     hideRemoteVideo();
     localVideo.addEventListener('playing', (event) => {

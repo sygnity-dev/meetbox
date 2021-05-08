@@ -39,7 +39,7 @@ export function init(containerId, configuration) {
   if (externalContainer) {
     gui.deleteAllChildren(externalContainer);
     externalContainer.appendChild(gui.createMeetboxContainer());
-    gui.init();
+    gui.init(configuration);
     const pageHideHandler = () => {
       pipe.close();
     };
