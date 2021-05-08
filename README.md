@@ -146,7 +146,7 @@ window.meetbox.joinMeeting(meetingId);
 1. Codebase refactoring, stabilisation and intensive testing (approx. end of June 2021).
 2. Custom implementation of signalling as an alternative for PubNub (approx. end of May 2021).
 3. Integration with [coturn](https://github.com/coturn/coturn) as an alternative for XirSys (approx. end of July 2021).
-4. Any requirements from community and users... 
+4. Any requirements from community and users...
 
 ## License
 
