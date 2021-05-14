@@ -65,15 +65,15 @@ export const gui = (function () {
    *
    */
   const init = (configuration) => {
-    localVideo = window.document.getElementById('mbxLocalVideo');
-    if (localVideo && configuration && configuration.localVideo) {
+    this.localVideo = window.document.getElementById('mbxLocalVideo');
+    if (this.localVideo && configuration && configuration.localVideo) {
       if (configuration.localVideo.width) {
-        localVideo.style.width = configuration.localVideo.width;
+        this.localVideo.style.width = configuration.localVideo.width;
       }
     }
     hideLocalVideo();
     hideRemoteVideo();
-    localVideo.addEventListener('playing', (event) => {
+    this.localVideo.addEventListener('playing', (event) => {
       logger.info('playing LOCAL video: width=' + event.target.videoWidth + ' height=' + event.target.videoHeight);
     });
     remoteVideo().addEventListener('playing', (event) => {
@@ -220,6 +220,7 @@ export const gui = (function () {
     showButton('mbxMicOnButton', true);
     showButton('mbxMicOffButton', false);
     pipe.micOn();
+    this.localVideo.muted = true;
   }
 
   /**
@@ -229,6 +230,7 @@ export const gui = (function () {
     showButton('mbxMicOnButton', false);
     showButton('mbxMicOffButton', true);
     pipe.micOff();
+    this.localVideo.muted = true;
   }
 
   /**
