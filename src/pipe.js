@@ -187,7 +187,6 @@ Pipe.prototype.startLocalStreaming = function (messageType) {
       gui.getLocalVideo().srcObject = mediaStream;
       gui.getLocalVideo().onloadedmetadata = function (_event) {
         gui.getLocalVideo().play();
-        gui.getLocalVideo().muted = '';
         logger.info('started to PLAY LOCAL stream');
       };
       me.localStream = mediaStream;
@@ -338,7 +337,6 @@ Pipe.prototype.onTrack = function (event) {
   gui.remoteVideo().srcObject = this.remoteStream;
   gui.remoteVideo().onloadedmetadata = function (_event) {
     gui.remoteVideo().play();
-    gui.remoteVideo().muted = '';
     logger.info('started to PLAY REMOTE stream');
   }
 }

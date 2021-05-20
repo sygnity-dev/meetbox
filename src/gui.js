@@ -36,7 +36,7 @@ export const gui = (function () {
   const HTML_STREAMING_CONTAINER = `
     <div id="mbxStreamingContainer" class="mbx-streaming-container">
       <div id="mbxRemoteVideoContainer" class="mbx-remote-video-container">
-        <video id="mbxRemoteVideo" class="mbx-remote-video" muted></video>
+        <video id="mbxRemoteVideo" class="mbx-remote-video"></video>
       </div>
       <div id="mbxLocalVideoContainer" class="mbx-local-video-container">
         <div id="mbxButtonContainer" class="mbx-button-container">
@@ -220,7 +220,6 @@ export const gui = (function () {
     showButton('mbxMicOnButton', true);
     showButton('mbxMicOffButton', false);
     pipe.micOn();
-    localVideo.muted = true;
   }
 
   /**
@@ -230,7 +229,6 @@ export const gui = (function () {
     showButton('mbxMicOnButton', false);
     showButton('mbxMicOffButton', true);
     pipe.micOff();
-    localVideo.muted = true;
   }
 
   /**
