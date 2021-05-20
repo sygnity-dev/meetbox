@@ -119,7 +119,7 @@ export const gui = (function () {
     common.addTouch(closeButton, () => {
       pipe.close();
     });
-    micOff();
+    micOn();
     micOnButton = window.document.getElementById('mbxMicOnButton');
     micOffButton = window.document.getElementById('mbxMicOffButton');
     common.addTouch(micOnButton, () => {
@@ -128,7 +128,7 @@ export const gui = (function () {
     common.addTouch(micOffButton, () => {
       micOn();
     });
-    camOff();
+    camOn();
     camOnButton = window.document.getElementById('mbxCamOnButton');
     camOffButton = window.document.getElementById('mbxCamOffButton');
     common.addTouch(camOnButton, () => {
