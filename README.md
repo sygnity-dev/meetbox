@@ -150,4 +150,10 @@ window.meetbox.joinMeeting(meetingId);
 
 ## License
 
-[MIT](LICENSE) [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT)
+This library is distributed under [MIT](LICENSE) [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT).
+
+This library includes icons from the [Font Awesome](https://fontawesome.com) project,
+taken from SVG formatted assets from the 'Free' download version.
+These components are applicable to the [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) license
+(which applies to all Font Awesome icons packaged as .svg and .js file types).
+Original .svg icons are modified by removing not used attributes from SVG element. 

@@ -92,7 +92,7 @@
 .mbx-close-button {
   width: 25.6pt;
   cursor: pointer;
-  margin: 4px 12px;
+  margin: 4px 24px;
 }
 
 .mbx-mic-buttons {
@@ -101,7 +101,7 @@
   justify-content: center;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin: 4px 12px;
+  margin: 4px 6px;
 }
 
 .mbx-mic-on-button {
@@ -120,7 +120,7 @@
   justify-content: center;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin: 4px 12px;
+  margin: 4px 6px;
 }
 
 .mbx-cam-off-button {
