@@ -89,35 +89,46 @@
   flex-wrap: nowrap;
 }
 
-.mbx-close-button,
-.mbx-mic-off-button,
-.mbx-mic-on-button,
-.mbx-cam-off-button,
-.mbx-cam-on-button {
-  border: solid 2px #9a9999;
-  width: 30px;
-  height: 30px;
-  margin: 14px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
 .mbx-close-button {
-  background-color: #d20000;
+  width: 25.6pt;
+  cursor: pointer;
+  margin: 4px 12px;
 }
 
-.mbx-mic-off-button {
-  background-color: #013601;
+.mbx-mic-buttons {
+  width: 32pt;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 4px 12px;
 }
 
 .mbx-mic-on-button {
-  background-color: #007f00;
+  width: 17.6pt;
+  cursor: pointer;
+}
+
+.mbx-mic-off-button {
+  width: 32pt;
+  cursor: pointer;
+}
+
+.mbx-cam-buttons {
+  width: 32pt;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 4px 12px;
 }
 
 .mbx-cam-off-button {
-  background-color: #590079;
+  width: 32pt;
+  cursor: pointer;
 }
 
 .mbx-cam-on-button {
-  background-color: #aa00e8;
+  width: 28.8pt;
+  cursor: pointer;
 }
