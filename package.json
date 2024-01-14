@@ -1,6 +1,6 @@
 {
   "name": "meetbox",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "The WebRTC library.",
   "keywords": [
     "WebRTC",
@@ -34,7 +34,7 @@
     "css-loader": "^5.2.4",
     "style-loader": "^2.0.0",
     "uuid": "^8.3.2",
-    "webpack": "^5.36.2",
+    "webpack": "^5.89.0",
     "webpack-cli": "^4.6.0",
     "webpack-merge": "^5.7.3"
   }

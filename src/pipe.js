@@ -44,6 +44,7 @@ function Pipe() {
   this.localStream = null;
   this.peerConnection = null;
   this.onCloseExternalHandler = null;
+  this.onStartStreamingExternalHandler = null;
   this.userMediaConstraints = null;
 }
 
@@ -201,9 +202,9 @@ Pipe.prototype.createConnection = function (messageType) {
   logger.info('creating new connection...');
   const me = this;
   ice.getServers().then((data) => {
-    const iceServers = {
+    const iceServers = [{
       iceServers: [data]
-    }
+    }];
     logger.info('ICE servers:', iceServers);
     this.peerConnection = new RTCPeerConnection(iceServers);
     this.peerConnection.onicecandidate = (function (event) {
@@ -338,6 +339,9 @@ Pipe.prototype.onTrack = function (event) {
   gui.remoteVideo().onloadedmetadata = function (_event) {
     gui.remoteVideo().play();
     logger.info('started to PLAY REMOTE stream');
+    if (this.onStartStreamingExternalHandler) {
+      this.onStartStreamingExternalHandler()
+    }
   }
 }
 
@@ -371,6 +375,9 @@ Pipe.prototype.onIceConnectionStateChange = function (_event) {
   }
 }
 
+Pipe.prototype.setOnStartStreamingExternal = function (handler) {
+  this.onStartStreamingExternal = handler;
+}
 Pipe.prototype.setOnCloseExternal = function (handler) {
   this.onCloseExternalHandler = handler;
 }

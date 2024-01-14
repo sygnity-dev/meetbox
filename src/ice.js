@@ -24,13 +24,36 @@ export const ice = new Ice();
 
 function Ice() {
   this.xirSys = null;
+  this.coturn = null;
 }
 
 Ice.prototype.init = function (configuration) {
   this.xirSys = configuration.xirSys;
+  this.coturn = configuration.coturn;
 }
 
 Ice.prototype.getServers = function () {
+	if (this.xirSys) {
+		return this.getServersXsys();
+	}
+	if (this.coturn) {
+		return this.getServersCoturn();
+	}
+	return new Promise((resolve, reject) => { reject("error") });
+}
+
+Ice.prototype.getServersCoturn = function () {
+  return new Promise((resolve, reject) => {
+    const res = this.coturn;
+    if (res && res[0] && res[0].iceServers) {
+      resolve(res[0].iceServers);
+    } else {
+      reject("error");
+    }
+  });
+}
+
+Ice.prototype.getServersXsys = function () {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     const url = this.xirSys.apiPath + '/_turn/' + this.xirSys.channel;
