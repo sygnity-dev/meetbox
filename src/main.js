@@ -102,6 +102,19 @@ export function closeMeeting() {
 }
 
 /**
+ * Assigns a handler triggered when the streaming started.
+ *
+ * @param handler Handler called when the streaming started.
+ */
+export function setOnStartStreaming(handler) {
+  if (gui.meetBoxContainer()) {
+    pipe.setOnStartStreamingExternal(handler);
+  } else {
+    logger.error(`MeetBox is not yet initialized.`,`call function 'init' before calling function 'setOnStartStreaming'`);
+  }
+}
+
+/**
  * Assigns a handler triggered when the connection is closed.
  *
  * @param handler Handler called when the connection is closed.
