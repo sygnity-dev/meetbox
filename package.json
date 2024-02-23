@@ -1,6 +1,6 @@
 {
   "name": "meetbox-sygnity",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "The WebRTC library.",
   "keywords": [
     "WebRTC",
