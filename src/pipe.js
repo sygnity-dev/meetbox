@@ -376,7 +376,7 @@ Pipe.prototype.onIceConnectionStateChange = function (_event) {
 }
 
 Pipe.prototype.setOnStartStreamingExternal = function (handler) {
-  this.onStartStreamingExternal = handler;
+  this.onStartStreamingExternalHandler = handler;
 }
 Pipe.prototype.setOnCloseExternal = function (handler) {
   this.onCloseExternalHandler = handler;
