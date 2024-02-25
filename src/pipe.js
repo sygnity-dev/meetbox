@@ -339,7 +339,9 @@ Pipe.prototype.onTrack = function (event) {
   gui.remoteVideo().onloadedmetadata = function (_event) {
     gui.remoteVideo().play();
     logger.info('started to PLAY REMOTE stream');
+	logger.info('started to PLAY REMOTE stream', this.onStartStreamingExternalHandler);
     if (this.onStartStreamingExternalHandler) {
+		logger.info('onStartStreamingExternalHandler running');
       this.onStartStreamingExternalHandler()
     }
   }
@@ -376,6 +378,7 @@ Pipe.prototype.onIceConnectionStateChange = function (_event) {
 }
 
 Pipe.prototype.setOnStartStreamingExternal = function (handler) {
+	logger.info('setOnStartStreamingExternal', handler);
   this.onStartStreamingExternalHandler = handler;
 }
 Pipe.prototype.setOnCloseExternal = function (handler) {
