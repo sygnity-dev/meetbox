@@ -295,6 +295,7 @@ Pipe.prototype.close = function () {
   gui.hideLocalVideo();
   gui.hideRemoteVideo();
   if (this.onCloseExternalHandler) {
+	  logger.info('onCloseExternalHandler - execute');
     this.onCloseExternalHandler();
   }
 };
@@ -342,7 +343,7 @@ Pipe.prototype.onTrack = function (event) {
 	logger.info('started to PLAY REMOTE stream', this.onStartStreamingExternalHandler);
     if (this.onStartStreamingExternalHandler) {
 		logger.info('onStartStreamingExternalHandler running');
-      this.onStartStreamingExternalHandler()
+      this.onStartStreamingExternalHandler();
     }
   }
 }
@@ -382,5 +383,6 @@ Pipe.prototype.setOnStartStreamingExternal = function (handler) {
   this.onStartStreamingExternalHandler = handler;
 }
 Pipe.prototype.setOnCloseExternal = function (handler) {
+	logger.info('setOnCloseExternal', handler);
   this.onCloseExternalHandler = handler;
 }

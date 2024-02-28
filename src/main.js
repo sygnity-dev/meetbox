@@ -122,7 +122,8 @@ export function setOnStartStreaming(handler) {
  */
 export function setOnClose(handler) {
   if (gui.meetBoxContainer()) {
-    pipe.setOnCloseExternal(handler);
+	  logger.info('setOnClose', handler);
+	  pipe.setOnCloseExternal(handler);
   } else {
     logger.error(`MeetBox is not yet initialized.`,`call function 'init' before calling function 'setOnClose'`);
   }
