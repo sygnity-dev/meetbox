@@ -334,16 +334,17 @@ Pipe.prototype.camOff = function () {
 
 Pipe.prototype.onTrack = function (event) {
   logger.info('PEER acquired REMOTE stream:', event);
+  const me = this;
   this.remoteStream = event.streams[0];
   gui.showRemoteVideo();
   gui.remoteVideo().srcObject = this.remoteStream;
   gui.remoteVideo().onloadedmetadata = function (_event) {
     gui.remoteVideo().play();
     logger.info('started to PLAY REMOTE stream');
-	logger.info('started to PLAY REMOTE stream', this.onStartStreamingExternalHandler);
-    if (this.onStartStreamingExternalHandler) {
+	logger.info('started to PLAY REMOTE stream', me.onStartStreamingExternalHandler);
+    if (me.onStartStreamingExternalHandler) {
 		logger.info('onStartStreamingExternalHandler running');
-      this.onStartStreamingExternalHandler();
+      me.onStartStreamingExternalHandler();
     }
   }
 }
